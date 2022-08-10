@@ -2,7 +2,7 @@ const bodyParser = require('body-parser');
 var axios = require('axios');
 const dotenv = require('dotenv');
 const port = 3000;
-
+dotenv.config();
 const {
     Metaplex,
     keypairIdentity,
@@ -19,11 +19,12 @@ const {
   const express = require("express");
   
 //   const pathToMyKeypair = process.env.HOME + "/.config/solana/id.json";
-  const pathToMyKeypair = "/Users/maarunipandithurai/.config/solana/id.json";
-  const keypairFile = fs.readFileSync(pathToMyKeypair);
-  const secretKey = Buffer.from(JSON.parse(keypairFile.toString()));
+  // const pathToMyKeypair = "./complexName15.json";
+  // const keypairFile = fs.readFileSync(pathToMyKeypair);
+  // const secretKey = Buffer.from(JSON.parse(keypairFile.toString()));
+  const secretKey =  Buffer.from(JSON.parse(process.env.id));
   const keypair = Keypair.fromSecretKey(secretKey);
-  console.log("keypair:", keypair);
+  // console.log("keypair:", keypair);
   const app = express();
 app.use(bodyParser.json());
   
@@ -281,7 +282,7 @@ const { nft: updatedNft } = await metaplex
 
   
   // app.listen(3000, () => console.log("Server is running over PORT 3000"));
-dotenv.config();
+
 console.log(process.env.PORT)
 app.listen(process.env.PORT || 5000, () => {
     console.log("server started to listen on " + process.env.PORT || 5000);
